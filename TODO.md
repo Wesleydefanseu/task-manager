@@ -1,14 +1,14 @@
-# Fix & Automation Feature TODO
+# Fix Plan: TypeError - Cannot read properties of undefined (reading 'findMany')
 
-## Fixes
-- [x] Fix 1: Mermaid Gantt `endTime` error — Handle tasks with only duration (no startDate)
-- [x] Fix 2: `removeChild` NotFoundError — Replace with `innerHTML = ''`
+## Root Cause
+Database URL path mismatch in Prisma adapter initialization. The URL `"file:./prisma/dev.db"` doesn't match the actual database location at `./dev.db`. This caused the Prisma client to point to a non-existent database file, resulting in all models being `undefined`.
 
-## Automation Feature
-- [x] Step 1: Create `src/lib/automation.ts` — Automation engine
-- [x] Step 2: Create `src/app/api/automation/route.ts` — CRUD for automation rules
-- [x] Step 3: Create `src/app/api/notifications/route.ts` — Notifications API
-- [x] Step 4: Create `src/components/AutomationPanel.tsx` — UI component
-- [x] Step 5: Update `src/app/dashboard/project/[id]/page.tsx` — Add Automation tab
-
+## Steps
+- [x] 1. Analyze the issue — complete (root cause identified)
+- [x] 2. Fix database URL in `src/lib/prisma.ts`: `"file:./prisma/dev.db"` → `"file:./dev.db"`
+- [x] 3. Fix database URL in `prisma/seed.ts` (same mismatch)
+- [x] 4. Run `npx prisma generate` to ensure client is up to date — already done
+- [x] 5. Run `npx prisma migrate deploy` to apply latest migrations (including AutomationRule & Notification tables) — already applied
+- [x] 6. Restart the dev server — done
+- [x] 7. Test API endpoints — ✅ notifications 200, automation 200, no more TypeError
 

@@ -3,6 +3,7 @@ import { useEffect, useState, FormEvent } from 'react';
 import Modal from '@/components/Modal';
 import ProjectCard from '@/components/ProjectCard';
 import type { Project, MemberRole } from '@/lib/types';
+import {RotateCcw, User } from 'lucide-react';
 
 type ProjectWithRole = Project & { myRole: MemberRole };
 
