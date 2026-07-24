@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-[#0a0a0a] flex flex-col">
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] flex flex-col">
 
       {/* ── Navbar ── */}
-      <nav className="sticky top-0 z-30 border-b border-[#e2ece7] bg-white/95 backdrop-blur-sm">
+      <nav className="sticky top-0 z-30 border-b border-[var(--border)] bg-[var(--background)]/95 backdrop-blur-sm">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <div className="flex items-center gap-3">
             <div className="h-9 w-9 rounded-xl bg-[#2d9e63] flex items-center justify-center shadow-sm">
@@ -28,7 +28,7 @@ export default function Home() {
         <section className="mx-auto max-w-6xl px-6 pt-24 pb-20 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#b2e8c8] bg-[#f0faf4] px-4 py-1.5 text-sm text-[#2d6a4f] font-medium mb-8">
             <span className="h-1.5 w-1.5 rounded-full bg-[#2d9e63] animate-pulse" />
-            Gestion de projets Agile & Kanban
+            Gestion de projets Agile &amp; Kanban
           </div>
 
           <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-[1.1] max-w-3xl mx-auto mb-6">
@@ -36,8 +36,8 @@ export default function Home() {
             <span className="text-[#2d9e63]">clarté</span>
           </h1>
 
-          <p className="text-lg text-[#6b7c74] max-w-xl mx-auto leading-relaxed mb-10">
-            Tableaux Kanban, diagrammes Gantt & PERT, gestion d'équipe — tout ce qu'il faut pour livrer vos projets à temps.
+          <p className="text-lg text-[var(--muted)] max-w-xl mx-auto leading-relaxed mb-10">
+            Tableaux Kanban, diagrammes Gantt &amp; PERT, gestion d&apos;équipe — tout ce qu&apos;il faut pour livrer vos projets à temps.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -58,14 +58,14 @@ export default function Home() {
             ].map((s) => (
               <div key={s.label} className="text-center">
                 <p className="text-2xl font-bold text-[#2d9e63]">{s.value}</p>
-                <p className="text-xs text-[#9ab0a6] mt-0.5">{s.label}</p>
+                <p className="text-xs text-[var(--muted-light)] mt-0.5">{s.label}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* ── Divider ── */}
-        <div className="border-t border-[#e2ece7]" />
+        <div className="border-t border-[var(--border)]" />
 
         {/* ── Features ── */}
         <section className="mx-auto max-w-6xl px-6 py-20">
@@ -89,7 +89,7 @@ export default function Home() {
                     <line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/>
                   </svg>
                 ),
-                title: 'Gantt & PERT',
+                title: 'Gantt &amp; PERT',
                 desc: 'Générez automatiquement vos diagrammes de planification avec calcul du chemin critique.',
               },
               {
@@ -98,26 +98,26 @@ export default function Home() {
                     <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
                   </svg>
                 ),
-                title: 'Gestion d\'équipe',
+                title: 'Gestion d&apos;équipe',
                 desc: 'Invitez des membres, assignez des rôles et suivez qui fait quoi sur chaque tâche.',
               },
             ].map((f) => (
               <div key={f.title} className="card p-6 hover:border-[#b2e8c8] hover:shadow-md transition-all duration-200">
-                <div className="h-10 w-10 rounded-xl bg-[#f0faf4] text-[#2d9e63] flex items-center justify-center mb-4">
+                <div className="h-10 w-10 rounded-xl bg-[var(--surface-2)] text-[#2d9e63] flex items-center justify-center mb-4">
                   {f.icon}
                 </div>
-                <h3 className="font-semibold text-[#0a0a0a] mb-2">{f.title}</h3>
-                <p className="text-sm text-[#6b7c74] leading-relaxed">{f.desc}</p>
+                <h3 className="font-semibold text-[var(--foreground)] mb-2">{f.title}</h3>
+                <p className="text-sm text-[var(--muted)] leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
         {/* ── CTA ── */}
-        <section className="border-t border-[#e2ece7] bg-[#f8faf9]">
+        <section className="border-t border-[var(--border)] bg-[var(--surface)]">
           <div className="mx-auto max-w-6xl px-6 py-16 text-center">
             <h2 className="text-3xl font-bold mb-4">Prêt à organiser vos projets ?</h2>
-            <p className="text-[#6b7c74] mb-8">Créez votre compte en 30 secondes, aucune carte bancaire requise.</p>
+            <p className="text-[var(--muted)] mb-8">Créez votre compte en 30 secondes, aucune carte bancaire requise.</p>
             <Link href="/register" className="btn-primary px-10 py-3 text-base">
               Démarrer maintenant →
             </Link>
@@ -126,8 +126,8 @@ export default function Home() {
       </main>
 
       {/* ── Footer ── */}
-      <footer className="border-t border-[#e2ece7] py-6">
-        <div className="mx-auto max-w-6xl px-6 flex items-center justify-between text-sm text-[#9ab0a6]">
+      <footer className="border-t border-[var(--border)] py-6">
+        <div className="mx-auto max-w-6xl px-6 flex items-center justify-between text-sm text-[var(--muted-light)]">
           <div className="flex items-center gap-2">
             <div className="h-6 w-6 rounded-lg bg-[#2d9e63] flex items-center justify-center">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -135,7 +135,7 @@ export default function Home() {
                 <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
               </svg>
             </div>
-            <span className="font-medium text-[#0a0a0a]">AgileTask</span>
+            <span className="font-medium text-[var(--foreground)]">AgileTask</span>
           </div>
           <span>© 2025 — Projet Tutoré M1</span>
         </div>

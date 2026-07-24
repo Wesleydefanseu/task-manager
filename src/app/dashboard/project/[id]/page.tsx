@@ -7,7 +7,8 @@ import GanttView from '@/components/GanttView';
 import PertView from '@/components/PertView';
 import MembersPanel from '@/components/MembersPanel';
 import TaskDetailModal from '@/components/TaskDetailModal';
-import type { Project, Task, TaskStatus, TaskPriority, ProjectMember, MemberRole } from '@/lib/types';
+import AutomationPanel from '@/components/AutomationPanel';
+import type { Project, Task, TaskStatus, TaskPriority, ProjectMember, MemberRole, AutomationRule } from '@/lib/types';
 import { canEdit, canManageMembers } from '@/lib/types';
 
 const COLUMNS: { status: TaskStatus; title: string }[] = [
@@ -16,7 +17,7 @@ const COLUMNS: { status: TaskStatus; title: string }[] = [
   { status: 'DONE',        title: 'Terminé' },
 ];
 
-type Tab = 'kanban' | 'gantt' | 'pert' | 'members';
+type Tab = 'kanban' | 'gantt' | 'pert' | 'members' | 'automation';
 
 export default function ProjectPage() {
   const params = useParams();
@@ -30,6 +31,9 @@ export default function ProjectPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [tab, setTab] = useState<Tab>('kanban');
+
+  const [rules, setRules] = useState<AutomationRule[]>([]);
+  const [unreadNotifs, setUnreadNotifs] = useState(0);
 
   const [filterPriority, setFilterPriority] = useState('ALL');
   const [filterAssignee, setFilterAssignee] = useState('ALL');
@@ -55,9 +59,11 @@ export default function ProjectPage() {
     setLoading(true);
     setError(null);
     try {
-      const [pRes, tRes] = await Promise.all([
+      const [pRes, tRes, ruleRes, notifRes] = await Promise.all([
         fetch(`/api/projects/${projectId}`),
         fetch(`/api/tasks?projectId=${projectId}`),
+        fetch(`/api/automation?projectId=${projectId}`),
+        fetch('/api/notifications?unreadOnly=true'),
       ]);
       if (!pRes.ok) throw new Error('Projet introuvable ou accès refusé.');
       if (!tRes.ok) throw new Error('Impossible de charger les tâches.');
@@ -66,6 +72,11 @@ export default function ProjectPage() {
       setMembers(pData.members ?? []);
       setMyRole(pData.myRole as MemberRole);
       setTasks(await tRes.json());
+      if (ruleRes.ok) setRules(await ruleRes.json());
+      if (notifRes.ok) {
+        const notifs = await notifRes.json();
+        setUnreadNotifs(notifs.length);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur');
     } finally { setLoading(false); }
@@ -135,6 +146,7 @@ export default function ProjectPage() {
     { key: 'gantt',   label: 'Gantt' },
     { key: 'pert',    label: 'PERT / CPM' },
     { key: 'members', label: `Équipe (${members.length})` },
+    { key: 'automation', label: `⚡ Auto` },
   ];
 
   if (loading) return (
@@ -256,6 +268,9 @@ export default function ProjectPage() {
       {tab === 'members' && project && (
         <MembersPanel projectId={projectId} members={members} myRole={myRole}
           onUpdate={loadData} />
+      )}
+      {tab === 'automation' && (
+        <AutomationPanel projectId={projectId} rules={rules} myRole={myRole} />
       )}
 
       {/* Modal nouvelle tâche */}

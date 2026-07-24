@@ -72,7 +72,7 @@ export default function RegisterPage() {
               { icon: '🔗', label: 'PERT / CPM' },
               { icon: '👥', label: 'Équipe' },
             ].map((item) => (
-              <div key={item.label} className="flex items-center gap-2.5 rounded-xl bg-white/5 border border-white/10 px-3 py-2.5">
+              <div key={item.label} className="flex items-center gap-2.5 rounded-xl bg-[var(--background)]/5 border border-white/10 px-3 py-2.5">
                 <span className="text-lg">{item.icon}</span>
                 <span className="text-white/80 text-sm font-medium">{item.label}</span>
               </div>
@@ -111,7 +111,7 @@ export default function RegisterPage() {
             </div>
           )}
           {success && (
-            <div className="mb-5 flex items-start gap-2.5 rounded-xl bg-[#f0faf4] border border-[#b2e8c8] px-4 py-3 text-sm text-[#1e4d38]">
+            <div className="mb-5 flex items-start gap-2.5 rounded-xl bg-[var(--surface-2)] border border-[var(--border-2)] px-4 py-3 text-sm text-[#1e4d38]">
               <svg className="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"/><polyline points="9,12 11,14 15,10"/>
               </svg>

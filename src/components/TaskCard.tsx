@@ -6,7 +6,7 @@ import { canEdit } from '@/lib/types';
 const PRIORITY: Record<Task['priority'], { label: string; color: string; dot: string }> = {
   HIGH:   { label: 'Haute',   color: 'bg-red-50 text-red-700 border-red-200',              dot: 'bg-red-500' },
   MEDIUM: { label: 'Moyenne', color: 'bg-orange-50 text-orange-700 border-orange-200',     dot: 'bg-orange-400' },
-  LOW:    { label: 'Basse',   color: 'bg-[#f0faf4] text-[#1e4d38] border-[#b2e8c8]',      dot: 'bg-[#2d9e63]' },
+  LOW:    { label: 'Basse',   color: 'bg-[var(--surface-2)] text-[#1e4d38] border-[var(--border-2)]',      dot: 'bg-[#2d9e63]' },
 };
 
 function Avatar({ name }: { name: string }) {

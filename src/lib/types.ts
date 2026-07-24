@@ -2,6 +2,9 @@ export type TaskStatus = "TODO" | "IN_PROGRESS" | "DONE";
 export type TaskPriority = "LOW" | "MEDIUM" | "HIGH";
 export type MemberRole = "ADMIN" | "MEMBER";
 
+export type TriggerType = "STATUS_CHANGE" | "DUE_DATE_NEAR" | "TASK_ASSIGNED";
+export type ActionType = "CHANGE_PRIORITY" | "CHANGE_STATUS" | "ASSIGN_USER" | "SEND_NOTIFICATION";
+
 export interface Task {
   id: string;
   title: string;
@@ -52,6 +55,27 @@ export interface CpmNode {
   lf: number;
   slack: number;
   isCritical: boolean;
+}
+
+export interface AutomationRule {
+  id: string;
+  name: string;
+  triggerType: TriggerType;
+  triggerValue: string | null;
+  actionType: ActionType;
+  actionValue: string | null;
+  projectId: string;
+  isActive: boolean;
+  createdAt: string;
+}
+
+export interface Notification {
+  id: string;
+  userId: string;
+  message: string;
+  link: string | null;
+  isRead: boolean;
+  createdAt: string;
 }
 
 // Permissions : ADMIN peut tout faire, MEMBER peut créer/modifier les tâches

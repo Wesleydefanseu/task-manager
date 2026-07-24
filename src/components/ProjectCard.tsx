@@ -5,7 +5,7 @@ import type { Project, MemberRole } from '@/lib/types';
 
 const ROLE_BADGE: Record<MemberRole, string> = {
   ADMIN:  'bg-purple-50 text-purple-700 border-purple-200',
-  MEMBER: 'bg-[#f0faf4] text-[#1e4d38] border-[#b2e8c8]',
+  MEMBER: 'bg-[var(--surface-2)] text-[#1e4d38] border-[var(--border-2)]',
 };
 const ROLE_LABEL: Record<MemberRole, string> = {
   ADMIN: 'Admin', MEMBER: 'Membre',
@@ -39,7 +39,7 @@ export default function ProjectCard({ project, myRole, onDelete }: {
     <div className={`card flex flex-col p-5 hover:border-[var(--border-2)] hover:shadow-md transition-all duration-200 ${deleting ? 'opacity-50' : ''}`}>
       {/* Header */}
       <div className="flex items-start justify-between gap-2 mb-3">
-        <div className="h-9 w-9 rounded-xl bg-[#f0faf4] flex items-center justify-center shrink-0">
+        <div className="h-9 w-9 rounded-xl bg-[var(--surface-2)] flex items-center justify-center shrink-0">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2d9e63" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
           </svg>

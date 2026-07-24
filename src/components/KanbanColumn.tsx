@@ -7,7 +7,7 @@ import { canEdit } from '@/lib/types';
 const COL_STYLE: Record<TaskStatus, { header: string; badge: string; border: string; bg: string; dot: string }> = {
   TODO:        { header: 'text-[var(--muted)]', badge: 'bg-[var(--surface-2)] text-[var(--muted)]',     border: 'border-[var(--border)]',   bg: 'bg-[var(--surface)]',    dot: 'bg-[var(--border-2)]' },
   IN_PROGRESS: { header: 'text-blue-700',  badge: 'bg-blue-50 text-blue-700',          border: 'border-blue-200/60', bg: 'bg-blue-50/30',   dot: 'bg-blue-400' },
-  DONE:        { header: 'text-[#2d6a4f]', badge: 'bg-[#d8f3e3] text-[#1e4d38]',      border: 'border-[#b2e8c8]',  bg: 'bg-[#f0faf4]/50', dot: 'bg-[#2d9e63]' },
+  DONE:        { header: 'text-[#2d6a4f]', badge: 'bg-[#d8f3e3] text-[#1e4d38]',      border: 'border-[var(--border-2)]',  bg: 'bg-[var(--surface-2)]/50', dot: 'bg-[#2d9e63]' },
 };
 
 export default function KanbanColumn({ title, status, tasks, myRole, onStatusChange, onTaskClick }: {

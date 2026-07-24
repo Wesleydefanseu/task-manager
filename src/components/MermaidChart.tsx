@@ -35,9 +35,7 @@ export default function MermaidChart({ chart }: { chart: string }) {
 
         // Clear previous content safely
         if (div) {
-          while (div.firstChild) {
-            div.removeChild(div.firstChild);
-          }
+          div.innerHTML = '';
         }
 
         const id = `mermaid-${Math.random().toString(36).slice(2, 10)}`;

@@ -19,9 +19,30 @@ function toDateStr(d: string | null | undefined): string {
   }
 }
 
+function taskMermaidId(taskId: string) {
+  return `t${taskId.replace(/-/g, '')}`;
+}
+
+function computeTaskOrder(taskList: Task[]): Map<string, number> {
+  const order = new Map<string, number>();
+  function getOrder(id: string): number {
+    if (order.has(id)) return order.get(id)!;
+    const t = taskList.find((x) => x.id === id);
+    if (!t) { order.set(id, 0); return 0; }
+    const depIds = (t.dependencies ?? []).map((d) => d.id);
+    if (depIds.length === 0) { order.set(id, 0); return 0; }
+    const maxDep = Math.max(...depIds.map((d) => getOrder(d))) + 1;
+    order.set(id, maxDep);
+    return maxDep;
+  }
+  for (const t of taskList) getOrder(t.id);
+  return order;
+}
+
 export default function GanttView({ tasks }: { tasks: Task[] }) {
   const cpmNodes = useMemo(() => computeCPM(tasks), [tasks]);
   const criticalIds = new Set(cpmNodes.filter((n) => n.isCritical).map((n) => n.id));
+  const taskOrder = useMemo(() => computeTaskOrder(tasks), [tasks]);
 
   const chart = useMemo(() => {
     const tasksWithDates = tasks.filter((t) => t.startDate || t.dueDate || t.duration);
@@ -41,15 +62,22 @@ export default function GanttView({ tasks }: { tasks: Task[] }) {
       lines.push(`  section ${section}`);
       for (const t of sectionTasks) {
         const name = sanitize(t.title);
+        const mid = taskMermaidId(t.id);
         const isCrit = criticalIds.has(t.id);
         const statusPrefix = isCrit ? 'crit' : t.status === 'DONE' ? 'done' : t.status === 'IN_PROGRESS' ? 'active' : '';
         const start = toDateStr(t.startDate);
         const end = toDateStr(t.dueDate);
         const dur = t.duration ? `${t.duration}d` : null;
 
-        // Mermaid Gantt: no IDs → task_name : [status,] start_date, end_date
+        // Use Mermaid's "after" syntax and/or status + dates
         let line = `  ${name} :`;
 
+        // Determine if we need "after" for tasks without startDate
+        const depIds = (t.dependencies ?? []).map((d) => d.id);
+        const needsAfter = !start && depIds.length > 0;
+        const afterId = needsAfter ? taskMermaidId(depIds[0]) : null;
+
+        // If we have start date, use it directly
         if (start && end) {
           if (statusPrefix) line += `${statusPrefix}, `;
           line += `${start}, ${end}`;
@@ -59,9 +87,17 @@ export default function GanttView({ tasks }: { tasks: Task[] }) {
         } else if (start) {
           if (statusPrefix) line += `${statusPrefix}, `;
           line += `${start}, 1d`;
-        } else if (dur) {
+        } else if (dur && afterId) {
+          // Use "after" syntax — place after the first dependency
           if (statusPrefix) line += `${statusPrefix}, `;
+          line += `after ${afterId}, ${dur}`;
+        } else if (dur) {
+          // Duration only, no start date, no dep — NO status modifier to prevent Mermaid parsing error
           line += `${dur}`;
+        } else if (end) {
+          // Has dueDate but no startDate — show as milestone-ish
+          if (statusPrefix) line += `${statusPrefix}, `;
+          line += `${end}, 1d`;
         } else {
           line += '1d';
         }
@@ -71,7 +107,7 @@ export default function GanttView({ tasks }: { tasks: Task[] }) {
     }
 
     return lines.join('\n');
-  }, [tasks, criticalIds]);
+  }, [tasks, criticalIds, taskOrder]);
 
   if (!chart) {
     return (
@@ -94,3 +130,4 @@ export default function GanttView({ tasks }: { tasks: Task[] }) {
     </div>
   );
 }
+

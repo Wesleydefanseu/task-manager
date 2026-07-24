@@ -13,7 +13,7 @@ function Avatar({ name }: { name: string }) {
 
 const ROLE_STYLE: Record<string, string> = {
   ADMIN:  'bg-purple-50 text-purple-700 border-purple-200',
-  MEMBER: 'bg-[#f0faf4] text-[#1e4d38] border-[#b2e8c8]',
+  MEMBER: 'bg-[var(--surface-2)] text-[#1e4d38] border-[var(--border-2)]',
 };
 
 export default function MembersPanel({ projectId, members, myRole, onUpdate }: {
