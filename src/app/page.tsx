@@ -1,3 +1,4 @@
+import { LayoutGrid, Calendar, User, Check } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Home() {
@@ -9,10 +10,7 @@ export default function Home() {
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <div className="flex items-center gap-3">
             <div className="h-9 w-9 rounded-xl bg-[#2d9e63] flex items-center justify-center shadow-sm">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-                <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-              </svg>
+              <LayoutGrid size={18} color="white" />
             </div>
             <span className="text-base font-bold tracking-tight">AgileTask</span>
           </div>
@@ -73,31 +71,17 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
               {
-                icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-                    <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-                  </svg>
-                ),
+              icon: <LayoutGrid size={22} />,
                 title: 'Tableau Kanban',
                 desc: 'Glissez-déposez vos tâches entre les colonnes À faire, En cours et Terminé.',
               },
               {
-                icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
-                    <line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/>
-                  </svg>
-                ),
+              icon: <Calendar size={22} />,
                 title: 'Gantt &amp; PERT',
                 desc: 'Générez automatiquement vos diagrammes de planification avec calcul du chemin critique.',
               },
               {
-                icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-                  </svg>
-                ),
+              icon: <User size={22} />,
                 title: 'Gestion d&apos;équipe',
                 desc: 'Invitez des membres, assignez des rôles et suivez qui fait quoi sur chaque tâche.',
               },
@@ -130,10 +114,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 flex items-center justify-between text-sm text-[var(--muted-light)]">
           <div className="flex items-center gap-2">
             <div className="h-6 w-6 rounded-lg bg-[#2d9e63] flex items-center justify-center">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-                <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-              </svg>
+              <LayoutGrid size={12} color="white" />
             </div>
             <span className="font-medium text-[var(--foreground)]">AgileTask</span>
           </div>

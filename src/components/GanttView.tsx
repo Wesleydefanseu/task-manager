@@ -2,6 +2,7 @@
 import { useMemo } from 'react';
 import MermaidChart from './MermaidChart';
 import { computeCPM } from '@/lib/cpm';
+import { Calendar } from 'lucide-react';
 import type { Task } from '@/lib/types';
 
 function sanitize(s: string) {
@@ -112,7 +113,7 @@ export default function GanttView({ tasks }: { tasks: Task[] }) {
   if (!chart) {
     return (
     <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-[var(--border-2)] bg-[var(--surface)] py-16 text-center">
-        <div className="text-3xl mb-3">📅</div>
+        <Calendar size={24} className="text-[var(--muted-light)] mb-3" />
         <p className="text-sm font-medium text-[var(--foreground)]">Aucune tâche avec des dates</p>
         <p className="text-xs text-[var(--muted-light)] mt-1">Ajoutez des dates de début/fin ou une durée aux tâches pour générer le Gantt.</p>
       </div>

@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { Plus, Trash2, Zap, Eye } from 'lucide-react';
 import type { AutomationRule, MemberRole } from '@/lib/types';
 import { canManageMembers } from '@/lib/types';
 
@@ -149,9 +150,7 @@ export default function AutomationPanel({
         </div>
         {isAdmin && (
           <button onClick={() => setShowForm(!showForm)} className="btn-primary text-sm">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-            </svg>
+            <Plus size={13} />
             {showForm ? 'Annuler' : 'Nouvelle règle'}
           </button>
         )}
@@ -238,7 +237,7 @@ export default function AutomationPanel({
         <div className="text-sm text-[var(--muted-light)]">Chargement...</div>
       ) : rules.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-[var(--border-2)] bg-[var(--surface)] py-12 text-center">
-          <div className="text-3xl mb-3">⚡</div>
+          <Zap size={24} className="text-[var(--muted-light)] mb-3" />
           <p className="text-sm font-medium text-[var(--foreground)]">Aucune règle d&apos;automatisation</p>
           <p className="text-xs text-[var(--muted-light)] mt-1">Créez des règles pour automatiser vos processus.</p>
         </div>
@@ -278,9 +277,7 @@ export default function AutomationPanel({
                     <button onClick={() => handleDelete(rule.id)}
                       className="p-1.5 rounded-lg text-[var(--muted-light)] hover:text-red-500 hover:bg-red-50 transition-colors"
                       title="Supprimer">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2,0,0,1-2,2H8a2,2,0,0,1-2-2L5,6"/>
-                      </svg>
+                      <Trash2 size={13} />
                     </button>
                   </>
                 )}
@@ -292,7 +289,7 @@ export default function AutomationPanel({
 
       {!isAdmin && (
         <div className="rounded-xl bg-[var(--surface-2)] border border-[var(--border)] px-4 py-3 text-xs text-[var(--muted)] text-center">
-          👁 Seuls les admins peuvent gérer les règles d&apos;automatisation.
+          <Eye size={14} className="shrink-0" /> Seuls les admins peuvent gérer les règles d&apos;automatisation.
         </div>
       )}
     </div>

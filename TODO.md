@@ -1,14 +1,14 @@
-# Fix Plan: TypeError - Cannot read properties of undefined (reading 'findMany')
+# Replacement des emojis par les icônes Lucide
 
-## Root Cause
-Database URL path mismatch in Prisma adapter initialization. The URL `"file:./prisma/dev.db"` doesn't match the actual database location at `./dev.db`. This caused the Prisma client to point to a non-existent database file, resulting in all models being `undefined`.
-
-## Steps
-- [x] 1. Analyze the issue — complete (root cause identified)
-- [x] 2. Fix database URL in `src/lib/prisma.ts`: `"file:./prisma/dev.db"` → `"file:./dev.db"`
-- [x] 3. Fix database URL in `prisma/seed.ts` (same mismatch)
-- [x] 4. Run `npx prisma generate` to ensure client is up to date — already done
-- [x] 5. Run `npx prisma migrate deploy` to apply latest migrations (including AutomationRule & Notification tables) — already applied
-- [x] 6. Restart the dev server — done
-- [x] 7. Test API endpoints — ✅ notifications 200, automation 200, no more TypeError
+## Terminé
+- [x] `src/app/dashboard/page.tsx` - Remplacer emojis stats (Folder, ClipboardList, CheckCircle, Zap)
+- [x] `src/app/dashboard/project/[id]/page.tsx` - Remplacer emojis (Zap tab, AlertTriangle overdue, X reset, priority emojis)
+- [x] `src/app/register/page.tsx` - Remplacer emojis grille (ClipboardList, Calendar, LinkIcon, Users)
+- [x] `src/app/login/page.tsx` - Remplacer 👋
+- [x] `src/components/AutomationPanel.tsx` - Remplacer ⚡, 👁 (Zap, Eye)
+- [x] `src/components/GanttView.tsx` - Remplacer 📅 (Calendar)
+- [x] `src/components/PertView.tsx` - Remplacer 🔗 (Link)
+- [x] `src/components/TaskCard.tsx` - Remplacer ⚠ (AlertTriangle)
+- [x] `src/components/ProjectCard.tsx` - Remplacer ⚡, 👥 (Zap, Users)
+- [x] `src/components/TaskDetailModal.tsx` - Remplacer 👁 (Eye)
 

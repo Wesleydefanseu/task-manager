@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
+import { Folder, Trash2, ArrowRight, X, Zap, Users } from 'lucide-react';
 import type { Project, MemberRole } from '@/lib/types';
 
 const ROLE_BADGE: Record<MemberRole, string> = {
@@ -39,11 +40,9 @@ export default function ProjectCard({ project, myRole, onDelete }: {
     <div className={`card flex flex-col p-5 hover:border-[var(--border-2)] hover:shadow-md transition-all duration-200 ${deleting ? 'opacity-50' : ''}`}>
       {/* Header */}
       <div className="flex items-start justify-between gap-2 mb-3">
-        <div className="h-9 w-9 rounded-xl bg-[var(--surface-2)] flex items-center justify-center shrink-0">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2d9e63" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-          </svg>
-        </div>
+          <div className="h-9 w-9 rounded-xl bg-[var(--surface-2)] flex items-center justify-center shrink-0">
+            <Folder size={16} color="#2d9e63" />
+          </div>
         <div className="flex items-center gap-1.5">
           {myRole && (
             <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-semibold ${ROLE_BADGE[myRole]}`}>
@@ -53,10 +52,7 @@ export default function ProjectCard({ project, myRole, onDelete }: {
           {onDelete && myRole === 'ADMIN' && (
           <button onClick={handleDelete} disabled={deleting}
               className="text-[var(--border-2)] hover:text-red-400 transition-colors p-1 rounded-lg hover:bg-red-50" aria-label="Supprimer">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2,0,0,1-2,2H8a2,2,0,0,1-2-2L5,6"/>
-                <path d="M10,11v6"/><path d="M14,11v6"/>
-              </svg>
+              <Trash2 size={13} />
             </button>
           )}
         </div>
@@ -82,20 +78,18 @@ export default function ProjectCard({ project, myRole, onDelete }: {
       <div className="flex items-center gap-2 mb-4 flex-wrap">
         {inProgress > 0 && (
           <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-0.5 text-xs font-medium">
-            ⚡ {inProgress} en cours
+            <Zap size={11} /> {inProgress} en cours
           </span>
         )}
         <span className="inline-flex items-center gap-1 rounded-full bg-[var(--surface-2)] text-[var(--muted)] border border-[var(--border)] px-2.5 py-0.5 text-xs font-medium">
-          👥 {memberCount} membre{memberCount !== 1 ? 's' : ''}
+          <Users size={11} /> {memberCount} membre{memberCount !== 1 ? 's' : ''}
         </span>
           <span className="text-xs text-[var(--muted-light)] ml-auto">{createdAt}</span>
       </div>
 
       <Link href={`/dashboard/project/${project.id}`} className="btn-primary w-full justify-center mt-auto">
         Ouvrir
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/>
-        </svg>
+        <ArrowRight size={13} />
       </Link>
     </div>
   );

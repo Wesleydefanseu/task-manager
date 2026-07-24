@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState, useMemo, FormEvent } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { ArrowLeft, Plus, Zap, AlertTriangle, X } from 'lucide-react';
 import Modal from '@/components/Modal';
 import KanbanColumn from '@/components/KanbanColumn';
 import GanttView from '@/components/GanttView';
@@ -146,7 +147,7 @@ export default function ProjectPage() {
     { key: 'gantt',   label: 'Gantt' },
     { key: 'pert',    label: 'PERT / CPM' },
     { key: 'members', label: `Équipe (${members.length})` },
-    { key: 'automation', label: `⚡ Auto` },
+    { key: 'automation', label: `Auto` },
   ];
 
   if (loading) return (
@@ -167,9 +168,7 @@ export default function ProjectPage() {
           <div className="flex items-start gap-3">
             <button onClick={() => router.push('/dashboard')}
               className="mt-0.5 text-[var(--muted-light)] hover:text-[var(--foreground)] transition-colors p-1 rounded-lg hover:bg-[var(--surface-2)]">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,19 5,12 12,5"/>
-              </svg>
+              <ArrowLeft size={16} />
             </button>
             <div>
               <div className="flex items-center gap-2">
@@ -188,9 +187,7 @@ export default function ProjectPage() {
           </div>
           {canEdit(myRole) && (
             <button onClick={() => setModalOpen(true)} className="btn-primary shrink-0">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-              </svg>
+              <Plus size={13} />
               Ajouter une tâche
             </button>
           )}
@@ -207,7 +204,7 @@ export default function ProjectPage() {
           <div className="flex items-center gap-2 flex-wrap text-xs">
             <span className="badge-green">{done} terminées</span>
             {inProgress > 0 && <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-0.5 font-medium">{inProgress} en cours</span>}
-            {overdue > 0 && <span className="badge-red">⚠ {overdue} en retard</span>}
+            {overdue > 0 && <span className="badge-red flex items-center gap-1"><AlertTriangle size={10} /> {overdue} en retard</span>}
             <span className="text-[var(--muted-light)]">{tasks.length} tâches</span>
           </div>
         </div>
@@ -235,9 +232,9 @@ export default function ProjectPage() {
             <select value={filterPriority} onChange={(e) => setFilterPriority(e.target.value)}
               className="rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-1.5 text-sm text-[var(--muted)] focus:outline-none focus:ring-1 focus:ring-[#2d9e63]">
               <option value="ALL">Toutes priorités</option>
-              <option value="HIGH">🔴 Haute</option>
-              <option value="MEDIUM">🟠 Moyenne</option>
-              <option value="LOW">🟢 Basse</option>
+              <option value="HIGH">Haute</option>
+              <option value="MEDIUM">Moyenne</option>
+              <option value="LOW">Basse</option>
             </select>
             <select value={filterAssignee} onChange={(e) => setFilterAssignee(e.target.value)}
               className="rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-1.5 text-sm text-[var(--muted)] focus:outline-none focus:ring-1 focus:ring-[#2d9e63]">
@@ -246,7 +243,7 @@ export default function ProjectPage() {
             </select>
             {(filterPriority !== 'ALL' || filterAssignee !== 'ALL') && (
               <button onClick={() => { setFilterPriority('ALL'); setFilterAssignee('ALL'); }}
-                className="btn-ghost text-xs px-3 py-1.5 border border-[var(--border)] rounded-lg">✕ Réinitialiser</button>
+                className="btn-ghost text-xs px-3 py-1.5 border border-[var(--border)] rounded-lg"><X size={12} /> Réinitialiser</button>
             )}
           </div>
         )}
@@ -292,9 +289,9 @@ export default function ProjectPage() {
               <div>
                 <label className="block text-sm font-medium text-[var(--foreground)] mb-1.5">Priorité</label>
                 <select value={priority} onChange={(e) => setPriority(e.target.value as TaskPriority)} className="input-field">
-                  <option value="LOW">🟢 Basse</option>
-                  <option value="MEDIUM">🟠 Moyenne</option>
-                  <option value="HIGH">🔴 Haute</option>
+                  <option value="LOW">Basse</option>
+                  <option value="MEDIUM">Moyenne</option>
+                  <option value="HIGH">Haute</option>
                 </select>
               </div>
               <div>

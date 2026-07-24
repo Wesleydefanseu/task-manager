@@ -1,5 +1,6 @@
 'use client';
 import { useState, FormEvent } from 'react';
+import { X, UserPlus, Trash2 } from 'lucide-react';
 import type { ProjectMember, MemberRole } from '@/lib/types';
 
 function Avatar({ name }: { name: string }) {
@@ -103,9 +104,7 @@ export default function MembersPanel({ projectId, members, myRole, onUpdate }: {
           {isAdmin && (
             <button onClick={() => handleRemove(m.id, m.user.name)}
               className="text-[var(--border-2)] hover:text-red-400 transition-colors p-1 rounded hover:bg-red-50" title="Retirer">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
+              <X size={13} />
             </button>
           )}
         </div>
@@ -130,10 +129,7 @@ export default function MembersPanel({ projectId, members, myRole, onUpdate }: {
       {isAdmin && (
     <div className="card p-5 border-dashed border-[var(--border-2)]">
       <p className="text-sm font-semibold text-[var(--foreground)] mb-3 flex items-center gap-2">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2d9e63" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-              <line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>
-            </svg>
+            <UserPlus size={14} color="#2d9e63" />
             Inviter un membre
           </p>
           <form onSubmit={handleInvite} className="space-y-3">

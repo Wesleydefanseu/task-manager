@@ -2,6 +2,7 @@
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { LayoutGrid, AlertCircle, CheckCircle, ClipboardList, Calendar, Link as LinkIcon, Users } from 'lucide-react';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -50,10 +51,7 @@ export default function RegisterPage() {
 
         <Link href="/" className="relative flex items-center gap-3">
           <div className="h-10 w-10 rounded-xl bg-[#2d9e63] flex items-center justify-center shadow-lg">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-              <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-            </svg>
+            <LayoutGrid size={18} color="white" />
           </div>
           <span className="text-white font-bold text-lg">AgileTask</span>
         </Link>
@@ -67,10 +65,10 @@ export default function RegisterPage() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { icon: '📋', label: 'Kanban' },
-              { icon: '📅', label: 'Gantt' },
-              { icon: '🔗', label: 'PERT / CPM' },
-              { icon: '👥', label: 'Équipe' },
+              { icon: <ClipboardList size={18} className="text-[#2d9e63]" />, label: 'Kanban' },
+              { icon: <Calendar size={18} className="text-[#2d9e63]" />, label: 'Gantt' },
+              { icon: <LinkIcon size={18} className="text-[#2d9e63]" />, label: 'PERT / CPM' },
+              { icon: <Users size={18} className="text-[#2d9e63]" />, label: 'Équipe' },
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-2.5 rounded-xl bg-[var(--background)]/5 border border-white/10 px-3 py-2.5">
                 <span className="text-lg">{item.icon}</span>
@@ -89,10 +87,7 @@ export default function RegisterPage() {
 
           <Link href="/" className="flex items-center gap-2 mb-10 lg:hidden">
             <div className="h-9 w-9 rounded-xl bg-[#2d9e63] flex items-center justify-center">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-                <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-              </svg>
+              <LayoutGrid size={16} color="white" />
             </div>
             <span className="font-bold text-[var(--foreground)]">AgileTask</span>
           </Link>
@@ -104,17 +99,13 @@ export default function RegisterPage() {
 
           {error && (
             <div className="mb-5 flex items-start gap-2.5 rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
-              <svg className="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-              </svg>
+              <AlertCircle className="shrink-0 mt-0.5" size={14} />
               {error}
             </div>
           )}
           {success && (
             <div className="mb-5 flex items-start gap-2.5 rounded-xl bg-[var(--surface-2)] border border-[var(--border-2)] px-4 py-3 text-sm text-[#1e4d38]">
-              <svg className="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/><polyline points="9,12 11,14 15,10"/>
-              </svg>
+              <CheckCircle className="shrink-0 mt-0.5" size={14} />
               {success}
             </div>
           )}

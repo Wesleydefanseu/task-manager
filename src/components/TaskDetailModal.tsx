@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, FormEvent } from 'react';
+import { Menu, Link2, X, Trash2, AlignJustify, Eye } from 'lucide-react';
 import type { Task, TaskStatus, TaskPriority, MemberRole } from '@/lib/types';
 import { canEdit, canDeleteTasks } from '@/lib/types';
 
@@ -127,9 +128,7 @@ export default function TaskDetailModal({
               </p>
             </div>
             <button onClick={onClose} className="shrink-0 h-8 w-8 rounded-lg flex items-center justify-center text-[var(--muted-light)] hover:bg-[var(--surface-2)] hover:text-[var(--foreground)] transition-colors">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
+              <X size={14} />
             </button>
           </div>
 
@@ -152,10 +151,8 @@ export default function TaskDetailModal({
 
               {/* Description */}
               <div>
-                <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="17" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="17" y1="18" x2="3" y2="18"/>
-                  </svg>
+              <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <AlignJustify size={12} />
                   Description
                 </p>
                 {editDesc && editable ? (
@@ -187,10 +184,8 @@ export default function TaskDetailModal({
               {/* Dependencies */}
               {otherTasks.length > 0 && (
                 <div>
-                  <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                    </svg>
+              <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <Link2 size={12} />
                     Dépendances
                   </p>
                   <div className="space-y-1.5 max-h-36 overflow-y-auto rounded-xl border border-[var(--border)] bg-[var(--surface)] p-2">
@@ -297,17 +292,14 @@ export default function TaskDetailModal({
               {deletable && (
                 <button onClick={handleDelete}
                   className="w-full flex items-center justify-center gap-1.5 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-medium text-red-600 hover:bg-red-100 transition-colors mt-2">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="3,6 5,6 21,6"/><path d="M19,6l-1,14a2,2,0,0,1-2,2H8a2,2,0,0,1-2-2L5,6"/>
-                    <path d="M10,11v6"/><path d="M14,11v6"/>
-                  </svg>
+                  <Trash2 size={12} />
                   Supprimer la tâche
                 </button>
               )}
 
               {!editable && (
-                <div className="rounded-xl bg-[var(--surface-2)] border border-[var(--border)] px-3 py-2.5 text-xs text-[var(--muted)] text-center">
-                  👁 Mode lecture seule
+                <div className="rounded-xl bg-[var(--surface-2)] border border-[var(--border)] px-3 py-2.5 text-xs text-[var(--muted)] text-center flex items-center justify-center gap-1.5">
+                  <Eye size={12} /> Mode lecture seule
                 </div>
               )}
             </div>

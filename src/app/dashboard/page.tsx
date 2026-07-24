@@ -3,7 +3,7 @@ import { useEffect, useState, FormEvent } from 'react';
 import Modal from '@/components/Modal';
 import ProjectCard from '@/components/ProjectCard';
 import type { Project, MemberRole } from '@/lib/types';
-import {RotateCcw, User } from 'lucide-react';
+import { Plus, Folder, ClipboardList, CheckCircle, Zap } from 'lucide-react';
 
 type ProjectWithRole = Project & { myRole: MemberRole };
 
@@ -65,9 +65,7 @@ export default function DashboardPage() {
           <p className="text-sm text-[var(--muted)] mt-1">Gérez vos projets et suivez l'avancement</p>
         </div>
         <button onClick={() => setModalOpen(true)} className="btn-primary">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-          </svg>
+          <Plus size={14} />
           Nouveau projet
         </button>
       </div>
@@ -76,10 +74,10 @@ export default function DashboardPage() {
       {projects.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           {[
-            { label: 'Projets', value: projects.length, icon: '📁', sub: `${adminCount} admin · ${memberCount} membre${memberCount !== 1 ? 's' : ''}` },
-            { label: 'Tâches totales', value: totalTasks, icon: '📋', sub: 'sur tous les projets' },
-            { label: 'Terminées', value: doneTasks, icon: '✅', sub: totalTasks > 0 ? `${Math.round((doneTasks / totalTasks) * 100)}% d'avancement` : '—' },
-            { label: 'En cours', value: projects.reduce((acc, p) => acc + (p.tasks?.filter((t) => t.status === 'IN_PROGRESS').length ?? 0), 0), icon: '⚡', sub: 'tâches actives' },
+            { label: 'Projets', value: projects.length, icon: <Folder size={18} className="text-[#2d9e63]" />, sub: `${adminCount} admin · ${memberCount} membre${memberCount !== 1 ? 's' : ''}` },
+            { label: 'Tâches totales', value: totalTasks, icon: <ClipboardList size={18} className="text-[#2d9e63]" />, sub: 'sur tous les projets' },
+            { label: 'Terminées', value: doneTasks, icon: <CheckCircle size={18} className="text-[#2d9e63]" />, sub: totalTasks > 0 ? `${Math.round((doneTasks / totalTasks) * 100)}% d'avancement` : '—' },
+            { label: 'En cours', value: projects.reduce((acc, p) => acc + (p.tasks?.filter((t) => t.status === 'IN_PROGRESS').length ?? 0), 0), icon: <Zap size={18} className="text-[#2d9e63]" />, sub: 'tâches actives' },
           ].map((s) => (
             <div key={s.label} className="card p-4 flex items-center gap-3">
               <span className="text-2xl">{s.icon}</span>
@@ -106,9 +104,7 @@ export default function DashboardPage() {
           <h3 className="font-semibold text-[var(--foreground)] mb-1">Aucun projet pour le moment</h3>
           <p className="text-sm text-[var(--muted)] mb-6 max-w-xs">Créez votre premier projet ou attendez qu'un collègue vous invite.</p>
           <button onClick={() => setModalOpen(true)} className="btn-primary">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-            </svg>
+            <Plus size={14} />
             Créer mon premier projet
           </button>
         </div>
